@@ -46,7 +46,7 @@ int main()
 	Min<char>(a, b);*/
 
 	int all = 0;
-	int time = 3;	//ŠÔ
+	int time = 8;	//ŠÔ
 	int m = 100;	//ŠKæ‚·‚é’l
 	int j = 1072;	//‹‹
 	int result;		//ŒvZŒ‹‰Ê
