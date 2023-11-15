@@ -3,67 +3,52 @@
 #include <Windows.h>
 #include <stdlib.h>
 #include <time.h>
-
-typedef void (*newType)(int*, int*);
-
-//結果  奇数か偶数か
-void DispResult(int* number, int* answer)
-{
-	if (*number == 1)
-	{
-		if (*answer == 1 || *answer == 3 || *answer == 5)
-		{
-			printf("奇数\n");
-		}
-		else
-		{
-			printf("×\n");
-		}
-	}
-	
-
-	if (*number == 0)
-	{
-		if (*answer == 2 || *answer == 4 || *answer == 6)
-		{
-			printf("偶数\n");
-		}
-		else
-		{
-			printf("×");
-		}
-	}
-	
-	
-}
-
-//結果まで3秒待つ  コールバック
-void setTimeout(newType calc, int second,int number ,int answer)
-{
-	Sleep(second * 180);
-
-	calc(&number, &answer);
-
-}
-
+#include <functional>
 
 int main()
 {
 	srand((unsigned int)time(NULL));
 
-	newType calc;
+	int num;
+	int select = 0;
 
-	calc = DispResult;
+	printf("半なら0を、丁なら1を入力\n");
+	scanf_s("%d", &select);
 
-	int number = 0;
-	int answer;
+	num = 1 + rand() % 6;
 
-	printf("偶数なら０を、奇数なら１を\n");
-	scanf_s("%d", &number);
+	std::function<void(void)>lottery = [=]()
+		{
+			printf("サイコロの目：%d\n", num);
 
-	answer = 1 + rand() % 6;
+			if (select == 0) {
+				if (num == 1 || num == 3 || num == 5) {
+					printf("半");
+				}
+				else {
+					printf("残念");
+				}
+			}
 
-	setTimeout(calc, 3, number, answer);
+			if (select == 1) {
+				if (num == 0 || num == 2 || num == 4 || num == 6) {
+					printf("丁");
+				}
+				else {
+					printf("残念");
+				}
+			}
+
+		};
+
+	std::function<void(int)> setTimeout = [=](int second) {
+		Sleep(second * 1000);
+
+		lottery();
+
+		};
+
+	setTimeout(3);
 
 	return(0);
 }
