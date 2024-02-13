@@ -22,11 +22,12 @@ void Thread3() {
 int main()
 {
 	std::thread thread1(Thread1);
-	std::thread thread2(Thread2);
-	std::thread thread3(Thread3);
-
 	thread1.join();
+
+	std::thread thread2(Thread2);
 	thread2.join();
+
+	std::thread thread3(Thread3);
 	thread3.join();
 
 	return(0);
