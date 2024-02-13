@@ -4,51 +4,54 @@
 #include <stdlib.h>
 #include <time.h>
 #include <functional>
+#include <list>
+#include <string>
+#include <iostream>
+using namespace std;
 
 int main()
 {
-	srand((unsigned int)time(NULL));
+	list<const char*> lst{
+	"Tokyo", "Kand", "Akihabara", "Okachimachi", "Ueno", "Uguisudani", "Nippori",
+	"Tabata", "Komagome", "Sugamo", "Otsuka", "Ikebukuro", "Mejiro", "Takadanobaba", "Shin-Okubo",
+	"Shinjuku", "Yoyogi", "Harajuku", "Shibuya", "Ebisu", "Meguro", "Gotanda", "Osaki", "Shinagawa",
+	"Tamachi","Hamamatutsucho", "Shimbashi", "Yurakucho",
+	};
 
-	int num;
-	int select = 0;
+	
+	printf("1970ÅhN\n");
+	for (auto itr = lst.begin(); itr != lst.end(); ++itr) {
+		std::cout << *itr << "\n";
+	}
+	printf("\n");
+	
 
-	printf("îºÇ»ÇÁ0ÇÅAíöÇ»ÇÁ1Çì¸óÕ\n");
-	scanf_s("%d", &select);
+	for (auto itr = lst.begin(); itr != lst.end(); ++itr) {
+		if (*itr == "Tabata") {
+			itr = lst.insert(itr, "Nishi-Nippori");
+			++itr;
+		}
+	}
+	printf("2019ÅhN\n");
+	for (auto itr = lst.begin(); itr != lst.end(); ++itr) {
+		std::cout << *itr << "\n";
+	}
+	printf("\n");
+	
 
-	num = 1 + rand() % 6;
 
-	std::function<void(void)>lottery = [=]()
-		{
-			printf("ÉTÉCÉRÉçÇÃñ⁄ÅF%d\n", num);
+	for (auto itr = lst.begin(); itr != lst.end(); ++itr) {
+		if (*itr == "Tamachi") {
+			itr = lst.insert(itr, "Takanawa Gateway");
+			++itr;
+		}
+	}
 
-			if (select == 0) {
-				if (num == 1 || num == 3 || num == 5) {
-					printf("îº");
-				}
-				else {
-					printf("écîO");
-				}
-			}
 
-			if (select == 1) {
-				if (num == 0 || num == 2 || num == 4 || num == 6) {
-					printf("íö");
-				}
-				else {
-					printf("écîO");
-				}
-			}
-
-		};
-
-	std::function<void(int)> setTimeout = [=](int second) {
-		Sleep(second * 1000);
-
-		lottery();
-
-		};
-
-	setTimeout(3);
+	printf("2022ÅhN\n");
+	for (auto itr = lst.begin(); itr != lst.end(); ++itr) {
+		std::cout << *itr << "\n";
+	}
 
 	return(0);
 }
